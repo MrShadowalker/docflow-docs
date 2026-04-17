@@ -4,7 +4,7 @@ info:
   description: >-
     DocFlow REST API, providing file upload and file processing result retrieval
     capabilities
-  version: 2.0.0
+  version: 2.4.2
 servers:
   - url: 'https://docflow.textin.com'
 x-codeSamples: custom
@@ -27,6 +27,7 @@ paths:
         - $ref: '#/components/parameters/ParserApplyMerge'
         - $ref: '#/components/parameters/ParserFormulaLevel'
         - $ref: '#/components/parameters/ParserTableTextSplitMode'
+        - $ref: '#/components/parameters/ParserDpi'
       requestBody:
         $ref: '#/components/requestBodies/FileUploadRequestBody'
       responses:
@@ -94,6 +95,7 @@ paths:
         - $ref: '#/components/parameters/ParserApplyMerge'
         - $ref: '#/components/parameters/ParserFormulaLevel'
         - $ref: '#/components/parameters/ParserTableTextSplitMode'
+        - $ref: '#/components/parameters/ParserDpi'
         - $ref: '#/components/parameters/WithTaskDetailUrl'
       requestBody:
         $ref: '#/components/requestBodies/FileUploadRequestBody'
@@ -2733,6 +2735,17 @@ components:
       schema:
         type: integer
         default: 0
+    ParserDpi:
+      name: parser_dpi
+      in: query
+      description: 'File resolution (144 default, 216 high precision)'
+      required: false
+      schema:
+        type: integer
+        default: 144
+        enum:
+          - 144
+          - 216
     WithTaskDetailUrl:
       name: with_task_detail_url
       in: query
@@ -2758,9 +2771,11 @@ components:
             type: object
             properties:
               urls:
-                description: |
+                description: >
                   File URL list
-                  Supports up to 10 file URLs per upload, each file maximum 50MB
+
+                  Supports up to 10 file URLs per upload, each file maximum
+                  100MB
                 type: array
                 items:
                   type: string
@@ -3741,6 +3756,13 @@ components:
           type: integer
           description: 'Remove watermark (0 no, 1 yes)'
           example: 0
+        dpi:
+          type: integer
+          description: 'File resolution (144 default, 216 high precision)'
+          example: 144
+          enum:
+            - 144
+            - 216
     TokenResult:
       type: object
       properties:

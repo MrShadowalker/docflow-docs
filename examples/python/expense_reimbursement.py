@@ -30,14 +30,13 @@ import requests
 # ============================================================
 APP_ID        = "your-app-id"      # TextIn 控制台中的 x-ti-app-id
 SECRET_CODE   = "your-secret-code" # TextIn 控制台中的 x-ti-secret-code
-ENTERPRISE_ID = 0                  # 企业组织 ID，可在 TextIn 控制台「账号与开发者信息」中查看
 
 BASE_URL = "https://docflow.textin.com"
 
-# 样本文件目录（相对本脚本的路径，已内置于 examples/sample_files/费用报销/）
+# 样本文件目录（相对本脚本的路径，已内置于 examples/sample_files/expense_reimbursement/）
 SAMPLE_DIR = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
-    "..", "sample_files", "费用报销"
+    "..", "sample_files", "expense_reimbursement"
 )
 
 # ============================================================
@@ -83,10 +82,9 @@ def create_workspace(name: str, description: str = "") -> str:
     """创建工作空间，返回 workspace_id。"""
     url = f"{BASE_URL}/api/app-api/sip/platform/v2/workspace/create"
     payload = {
-        "name":          name,
-        "description":   description,
-        "enterprise_id": ENTERPRISE_ID,
-        "auth_scope":    0,   # 0: 仅自己可见；1: 企业成员可见
+        "name":        name,
+        "description": description,
+        "auth_scope":  0,   # 0: 仅自己可见；1: 企业成员可见
     }
     resp = requests.post(url, json=payload, headers=_headers(), timeout=30)
     data = _check(resp, "创建工作空间")
@@ -126,7 +124,7 @@ def create_category(
         form_data = [
             ("workspace_id",    (None, workspace_id)),
             ("name",            (None, name)),
-            ("extract_model",   (None, "llm")),
+            ("extract_model",   (None, "Model 1")),
             ("category_prompt", (None, category_prompt)),
             ("fields",          (None, json.dumps(fields, ensure_ascii=False))),
             ("sample_files",    (os.path.basename(sample_file_path), f, mime)),
@@ -438,7 +436,7 @@ def main():
     baoxiao_id = create_category(
         workspace_id=workspace_id,
         name="报销申请单",
-        sample_file_path=os.path.join(SAMPLE_DIR, "报销申请单.XLS"),
+        sample_file_path=os.path.join(SAMPLE_DIR, "sample_expense_form.xls"),
         fields=[
             {"name": "申请人"},     {"name": "出差目的"},   {"name": "报销期间"},
             {"name": "目的地"},     {"name": "费用发生日期"}, {"name": "费用项目"},
@@ -489,7 +487,7 @@ def main():
     # ----------------------------------------------------------
     print("\n开始上传待处理文件...")
     upload_targets = [
-        os.path.join(SAMPLE_DIR, "报销申请单.XLS"),
+        os.path.join(SAMPLE_DIR, "sample_expense_form.xls"),
         os.path.join(SAMPLE_DIR, "sample_hotel_receipt.png"),
         os.path.join(SAMPLE_DIR, "sample_payment_record.pdf"),
     ]

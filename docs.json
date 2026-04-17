@@ -28,7 +28,47 @@
               {
                 "group": "场景化示例",
                 "pages": [
-                  "docflow/cn/00-overview/expense_reimbursement"
+                  {
+                    "group": "费用报销场景",
+                    "pages": [
+                      "docflow/cn/00-overview/expense_reimbursement",
+                      "docflow/cn/00-overview/expense_reimbursement_already_configured"
+                    ]
+                  },
+                  {
+                    "group": "AP审单场景",
+                    "pages": [
+                      "docflow/cn/00-overview/ap_review",
+                      "docflow/cn/00-overview/ap_review_already_configured"
+                    ]
+                  },
+                  {
+                    "group": "合同审核场景",
+                    "pages": [
+                      "docflow/cn/00-overview/contract_review",
+                      "docflow/cn/00-overview/contract_review_already_configured"
+                    ]
+                  },
+                  {
+                    "group": "底层原子能力 - 文档解析",
+                    "pages": [
+                      "docflow/cn/00-overview/atomic_capabilities_parse",
+                      "xparse/parse-quickstart",
+                      "xparse/parse-getjson",
+                      "xparse/parse-gettable",
+                      "xparse/parse-getcatalog",
+                      "xparse/parse-getimage",
+                      "xparse/parse-getpos",
+                      "xparse/parse-max-workers"
+                    ]
+                  },
+                  {
+                    "group": "底层原子能力 - 文档抽取",
+                    "pages": [
+                      "docflow/cn/00-overview/atomic_capabilities_extract",
+                      "xparse/entity-extraction"
+                    ]
+                  }
                 ]
               },
               {
@@ -139,8 +179,19 @@
           {
             "tab": "API",
             "openapi": "docflow/cn/rest-api/openapi.bundle.yaml"
+          },
+          {
+            "tab": "SDK",
+            "groups": [
+              {
+                "group": "SDK",
+                "pages": [
+                  "docflow/cn/11-sdk/python_sdk"
+                ]
+              }
+            ]
+            
           }
-
         ]
       },
       {
@@ -260,6 +311,18 @@
           {
             "tab": "API",
             "openapi": "docflow/en/rest-api/openapi.bundle.yaml"
+          },
+          {
+            "tab": "SDK",
+            "groups": [
+              {
+                "group": "SDK",
+                "pages": [
+                  "docflow/en/11-sdk/python_sdk"
+                ]
+              }
+            ]
+            
           }
 
         ]

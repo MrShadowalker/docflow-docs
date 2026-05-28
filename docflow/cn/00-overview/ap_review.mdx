@@ -169,14 +169,14 @@ description: "在财务部门 AP（应付账款）审单业务场景中，调用
   <Accordion defaultOpen title="规则组 1：业务一致性审核（跨单据交叉核验）">
     | 规则名称 | 风险等级 | 审核逻辑 |
     |---|---|---|
-    | <span style={{color: "#3b82f6"}}>供应商一致性</span> | 🔴 高风险 | 若均存在税号，则发票销售方税号 = 合同乙方税号 = 入库单供应商税号；否则比对名称 |
-    | <span style={{color: "#3b82f6"}}>金额匹配</span> | 🔴 高风险 | 发票价税合计金额 ≤ 采购合同总金额；框架协议（金额为空或 0）时不校验 |
-    | <span style={{color: "#3b82f6"}}>数量一致性（入库单维度）</span> | 🟡 中风险 | 若发票含商品明细，则发票数量合计 ≤ 入库单实收数量合计 |
-    | <span style={{color: "#3b82f6"}}>标的一致性</span> | 🟢 低风险 | 合同约定的规格型号须与入库单、发票中的规格型号一致；未约定规格型号时校验标的物描述是否指向同一商品 |
-    | <span style={{color: "#3b82f6"}}>税率一致性</span> | 🟡 中风险 | 发票各行税率须与合同约定税率一致；合同未约定税率时跳过 |
-    | <span style={{color: "#3b82f6"}}>验收结论校验</span> | 🟡 中风险 | 验收单的验收结论须为合格/通过/验收通过/同意验收或类似认可状态 |
-    | <span style={{color: "#3b82f6"}}>数量一致性（验收单维度）</span> | 🟡 中风险 | 若发票含商品明细且验收单有合格数量，则发票数量合计 ≤ 验收单合格数量 |
-    | <span style={{color: "#3b82f6"}}>合同关联性</span> | 🟡 中风险 | 入库单合同编号 = 采购合同编号；验收单合同编号 = 采购合同编号 |
+    | <span style={{color: "#3b82f6"}}>供应商一致性</span> | <span style={{color: "#ef4444"}}>●</span> 高风险 | 若均存在税号，则发票销售方税号 = 合同乙方税号 = 入库单供应商税号；否则比对名称 |
+    | <span style={{color: "#3b82f6"}}>金额匹配</span> | <span style={{color: "#ef4444"}}>●</span> 高风险 | 发票价税合计金额 ≤ 采购合同总金额；框架协议（金额为空或 0）时不校验 |
+    | <span style={{color: "#3b82f6"}}>数量一致性（入库单维度）</span> | <span style={{color: "#eab308"}}>●</span> 中风险 | 若发票含商品明细，则发票数量合计 ≤ 入库单实收数量合计 |
+    | <span style={{color: "#3b82f6"}}>标的一致性</span> | <span style={{color: "#22c55e"}}>●</span> 低风险 | 合同约定的规格型号须与入库单、发票中的规格型号一致；未约定规格型号时校验标的物描述是否指向同一商品 |
+    | <span style={{color: "#3b82f6"}}>税率一致性</span> | <span style={{color: "#eab308"}}>●</span> 中风险 | 发票各行税率须与合同约定税率一致；合同未约定税率时跳过 |
+    | <span style={{color: "#3b82f6"}}>验收结论校验</span> | <span style={{color: "#eab308"}}>●</span> 中风险 | 验收单的验收结论须为合格/通过/验收通过/同意验收或类似认可状态 |
+    | <span style={{color: "#3b82f6"}}>数量一致性（验收单维度）</span> | <span style={{color: "#eab308"}}>●</span> 中风险 | 若发票含商品明细且验收单有合格数量，则发票数量合计 ≤ 验收单合格数量 |
+    | <span style={{color: "#3b82f6"}}>合同关联性</span> | <span style={{color: "#eab308"}}>●</span> 中风险 | 入库单合同编号 = 采购合同编号；验收单合同编号 = 采购合同编号 |
 
     <Tip>
       跨文档规则的 `category_ids` 包含多个分类 ID，只有当审核任务覆盖所有关联分类时，该规则才会被触发执行。
@@ -185,10 +185,10 @@ description: "在财务部门 AP（应付账款）审单业务场景中，调用
   <Accordion defaultOpen title="规则组 2：文档采集与预处理审核">
     | 规则名称 | 风险等级 | 审核逻辑 |
     |---|---|---|
-    | <span style={{color: "#3b82f6"}}>信息完整性校验</span> | 🟡 中风险 | 检查四类文档齐全性并核验各文档必填字段非空（详见审核点说明） |
-    | <span style={{color: "#3b82f6"}}>发票日期合规性</span> | 🟡 中风险 | 发票开票日期 ≥ 合同签订日期 |
-    | <span style={{color: "#3b82f6"}}>购买方信息匹配</span> | 🔴 高风险 | 发票购买方名称 = 上海合合信息科技股份有限公司；购买方税号 = 91310110791485269J |
-    | <span style={{color: "#3b82f6"}}>税率合规性校验</span> | 🟡 中风险 | 货物类税率应为 13%，服务类应为 6%，小规模纳税人应为 1% 或 3% |
+    | <span style={{color: "#3b82f6"}}>信息完整性校验</span> | <span style={{color: "#eab308"}}>●</span> 中风险 | 检查四类文档齐全性并核验各文档必填字段非空（详见审核点说明） |
+    | <span style={{color: "#3b82f6"}}>发票日期合规性</span> | <span style={{color: "#eab308"}}>●</span> 中风险 | 发票开票日期 ≥ 合同签订日期 |
+    | <span style={{color: "#3b82f6"}}>购买方信息匹配</span> | <span style={{color: "#ef4444"}}>●</span> 高风险 | 发票购买方名称 = 上海合合信息科技股份有限公司；购买方税号 = 91310110791485269J |
+    | <span style={{color: "#3b82f6"}}>税率合规性校验</span> | <span style={{color: "#eab308"}}>●</span> 中风险 | 货物类税率应为 13%，服务类应为 6%，小规模纳税人应为 1% 或 3% |
   </Accordion>
 </AccordionGroup>
 
@@ -207,7 +207,8 @@ description: "在财务部门 AP（应付账款）审单业务场景中，调用
 | `create_workspace` | `createWorkspace` | `POST /workspace/create` | 创建工作空间，返回 workspace_id |
 | `create_category` | `createCategory` | `POST /category/create` | 创建文件类别并上传样本，返回 category_id |
 | `add_category_field` | `addCategoryField` | `POST /category/fields/add` | 为已有类别追加字段（用于添加表格字段） |
-| `upload_file` | `uploadFile` | `POST /file/upload` | 上传待处理文件，返回 batch_number |
+| `upload_file` | `uploadFile` | `POST /file/upload` | 异步上传文件，返回 batch_number，需轮询获取结果 |
+| `upload_file_sync` | `uploadFileSync` | `POST /file/upload/sync` | 同步上传文件，直接返回抽取结果，无需轮询 |
 | `create_rule_repo` | `createRuleRepo` | `POST /review/rule_repo/create` | 创建审核规则库，返回 repo_id |
 | `create_rule_group` | `createRuleGroup` | `POST /review/rule_group/create` | 在规则库内创建规则组，返回 group_id |
 | `create_rule` | `createRule` | `POST /review/rule/create` | 在规则组内创建审核规则，绑定适用分类 |
@@ -271,6 +272,125 @@ description: "在财务部门 AP（应付账款）审单业务场景中，调用
                 SAMPLE_DIR + "/sample_contract.pdf", contractFields, "");
         for (String fn : new String[]{"产品型号", "产品说明", "单价", "数量", "金额"}) {
             addCategoryField(workspaceId, contractId, fn, "-1");
+        }
+        ```
+      </Tab>
+    </Tabs>
+  </Accordion>
+  <Accordion defaultOpen title="步骤 3：上传待处理文件">
+    文件上传支持两种模式，可根据业务场景选择：
+
+    - **异步上传**（`file/upload`）：上传后立即返回 `batch_number`，需配合步骤 4 轮询 `file/fetch` 获取抽取结果。适合大批量文件并发处理。
+    - **同步上传**（`file/upload/sync`）：上传后等待处理完成，直接返回抽取结果，无需轮询。适合单文件或少量文件的实时场景。
+
+    **方式一：异步上传（需配合步骤 4 轮询）**
+
+    <Tabs>
+      <Tab title="Python">
+        ```python
+        batch_numbers = []
+        for file_path in [
+            os.path.join(SAMPLE_DIR, "sample_invoice.pdf"),
+            os.path.join(SAMPLE_DIR, "sample_contract.pdf"),
+            os.path.join(SAMPLE_DIR, "sample_inbound.pdf"),
+            os.path.join(SAMPLE_DIR, "sample_acceptance.pdf"),
+        ]:
+            batch_number = upload_file(workspace_id, file_path)
+            batch_numbers.append(batch_number)
+        ```
+      </Tab>
+      <Tab title="Java">
+        ```java
+        List<String> batchNumbers = new ArrayList<>();
+        for (String path : new String[]{
+                SAMPLE_DIR + "/sample_invoice.pdf",
+                SAMPLE_DIR + "/sample_contract.pdf",
+                SAMPLE_DIR + "/sample_inbound.pdf",
+                SAMPLE_DIR + "/sample_acceptance.pdf"}) {
+            batchNumbers.add(uploadFile(workspaceId, path));
+        }
+        ```
+      </Tab>
+    </Tabs>
+
+    **方式二：同步上传（直接返回抽取结果，跳过步骤 4）**
+
+    <Tabs>
+      <Tab title="Python">
+        ```python
+        def upload_file_sync(workspace_id: str, file_path: str) -> dict:
+            """同步上传：直接返回抽取结果，无需轮询。"""
+            url = f"{BASE_URL}/api/app-api/sip/platform/v2/file/upload/sync"
+            with open(file_path, "rb") as f:
+                resp = requests.post(url,
+                    params={"workspace_id": workspace_id},
+                    files={"file": (os.path.basename(file_path), f, _mime(file_path))},
+                    headers=_headers(), timeout=300)
+            data = _check(resp, "同步上传文件")
+            return data["result"]["files"][0]   # 返回结构与 file/fetch 一致
+
+        # 调用示例：上传即得到抽取结果，可直接用于审核
+        raw_results = [upload_file_sync(workspace_id, p) for p in [
+            os.path.join(SAMPLE_DIR, "sample_invoice.pdf"),
+            os.path.join(SAMPLE_DIR, "sample_contract.pdf"),
+            os.path.join(SAMPLE_DIR, "sample_inbound.pdf"),
+            os.path.join(SAMPLE_DIR, "sample_acceptance.pdf"),
+        ]]
+        ```
+      </Tab>
+      <Tab title="Java">
+        ```java
+        public static JsonObject uploadFileSync(String workspaceId, String filePath) throws IOException {
+            File file = new File(filePath);
+            HttpUrl url = HttpUrl.parse(BASE_URL + "/api/app-api/sip/platform/v2/file/upload/sync")
+                    .newBuilder().addQueryParameter("workspace_id", workspaceId).build();
+            MultipartBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                    .addFormDataPart("file", file.getName(),
+                            RequestBody.create(file, MediaType.get(mimeType(file.getName()))))
+                    .build();
+            Request req = new Request.Builder().url(url).headers(authHeaders()).post(body).build();
+            try (Response resp = HTTP.newCall(req).execute()) {
+                return checkResponse(resp.body().string(), "同步上传文件")
+                        .getAsJsonObject("result").getAsJsonArray("files")
+                        .get(0).getAsJsonObject();
+            }
+        }
+
+        // 调用示例
+        List<JsonObject> rawResults = new ArrayList<>();
+        for (String path : new String[]{
+                SAMPLE_DIR + "/sample_invoice.pdf",
+                SAMPLE_DIR + "/sample_contract.pdf",
+                SAMPLE_DIR + "/sample_inbound.pdf",
+                SAMPLE_DIR + "/sample_acceptance.pdf"}) {
+            rawResults.add(uploadFileSync(workspaceId, path));
+        }
+        ```
+      </Tab>
+    </Tabs>
+  </Accordion>
+  <Accordion defaultOpen title="步骤 4：获取抽取结果（使用同步上传时可跳过）">
+    <Note>若步骤 3 使用了同步上传 `file/upload/sync`，则已直接获得抽取结果，可跳过本步骤。</Note>
+
+    异步上传后，需轮询 `file/fetch` 接口等待处理完成：
+
+    <Tabs>
+      <Tab title="Python">
+        ```python
+        raw_results = []
+        for batch_number in batch_numbers:
+            result = wait_for_result(workspace_id, batch_number)
+            raw_results.append(result)
+            display_result(result)
+        ```
+      </Tab>
+      <Tab title="Java">
+        ```java
+        List<JsonObject> rawResults = new ArrayList<>();
+        for (String batchNumber : batchNumbers) {
+            JsonObject result = waitForResult(workspaceId, batchNumber);
+            rawResults.add(result);
+            displayResult(result);
         }
         ```
       </Tab>

@@ -4,6 +4,65 @@ sidebarTitle: "Changelog"
 description: "DocFlow API documentation changelog"
 ---
 
+## 2026-06-02
+
+### API
+
+#### Primary Endpoints Upgrade
+
+Process multiple objects in a single request. All endpoints use **all-or-nothing** semantics — if any item fails validation, the entire batch is rejected.
+
+| Endpoint | Description |
+|----------|-------------|
+| [Add File Category Fields](/api-reference/file-category/add-file-category-fields) | Create up to 100 fields at once |
+| [Update File Category Fields](/api-reference/file-category/update-file-category-fields) | Update multiple field configs |
+| [Add File Category Tables](/api-reference/file-category/add-file-category-tables) | Create tables (with embedded fields) |
+| [Update File Category Tables](/api-reference/file-category/update-file-category-tables) | Update multiple table configs |
+| [Upload Category Samples](/api-reference/file-category-samples/upload-category-samples) | Upload multiple samples (up to 20) |
+| [Download Category Samples (ZIP)](/api-reference/file-category-samples/download-category-samples-zip) | Download samples as ZIP |
+
+#### Deprecated Endpoints
+
+The following single-item endpoints are now marked as `deprecated`. They remain functional but will no longer be maintained. Please migrate to the primary endpoints above:
+
+| Deprecated | Replacement |
+|-----------|-------------|
+| Add Single File Category Field | [Add File Category Fields](/api-reference/file-category/add-file-category-fields) |
+| Update Single File Category Field | [Update File Category Fields](/api-reference/file-category/update-file-category-fields) |
+| Add Single File Category Table | [Add File Category Tables](/api-reference/file-category/add-file-category-tables) |
+| Update Single File Category Table | [Update File Category Tables](/api-reference/file-category/update-file-category-tables) |
+| Upload Single Category Sample | [Upload Category Samples](/api-reference/file-category-samples/upload-category-samples) |
+| Download Single Category Sample | [Download Category Samples (ZIP)](/api-reference/file-category-samples/download-category-samples-zip) |
+
+#### One-Step Category Creation
+
+[Create File Category](/api-reference/file-category/create-file-category) now accepts a `tables` parameter — configure tables and their fields in a single call when creating a category.
+
+#### Field Advanced Config
+
+[Update File Category Field](/api-reference/file-category/update-file-category-field) (single + [batch](/api-reference/file-category/batch-update-file-category-fields)) now support these properties:
+
+| Property | Description | Update Semantics |
+|----------|-------------|-----------------|
+| `alias` | Field aliases | omit=no change, `[]`=clear, `["a","b"]`=override |
+| `identity` | Export field name | omit=no change, `""`=clear, non-empty=override |
+| `multi_value` | Multi-value extraction | omit=no change, `true`/`false`=override |
+| `duplicate_value_distinct` | Deduplicate values | Only effective when `multi_value=true` |
+| `transform_settings` | Output transform config | Supports datetime / enumerate / regex |
+
+#### Enriched Responses
+
+Get full config without extra queries:
+
+- [Get File Category Field List](/api-reference/file-category/get-file-category-field-list) — added `enabled`, `prompt`, `use_prompt`, `extract_model`, `alias`, `identity`, `multi_value`, `duplicate_value_distinct`, `transform_settings`
+- [Get File Category Table List](/api-reference/file-category/get-file-category-table-list) — added `prompt`, `collect_from_multi_table`, `extract_model`
+- [List File Categories](/api-reference/file-category/list-file-categories) — added `category_prompt`, `extract_model`
+- **with_detail flag** — pass `with_detail=true` on create/update to get the complete object in the response
+
+### SDK
+
+- Python SDK `fields.update()` and `fields.batch_update()` — added advanced config parameters and clear semantics examples
+
 ## 2026-05-27
 
 **API**
